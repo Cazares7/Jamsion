@@ -29,10 +29,16 @@ public class PlayerControllerTemplate : MonoBehaviour
     private void FixedUpdate()
     {
     }
+    private void OnBecameInvisible() //Player moves off screen
+    {
+        health.Death();
 
+    }
     // Update is called once per frame
     void Update()
     {
+
+
         //For movement
         float threshold = 0.5f;
 

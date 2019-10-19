@@ -27,23 +27,26 @@ public class GoblinAI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float threshold = .5f;
-        if (Mathf.Abs(x_input) > threshold || Mathf.Abs(y_input) > threshold)
-            anim.SetBool("Moving", true);
-        else
-            anim.SetBool("Moving", false);
-
-        FollowTarget();
-        AttackTarget();
-        SetSword();
-
-        if (facing_right)
+        if (GameObject.FindGameObjectWithTag("Player"))
         {
-            sprite.flipX = false;
-        }
-        else if (!facing_right)
-        {
-            sprite.flipX = true;
+            float threshold = .5f;
+            if (Mathf.Abs(x_input) > threshold || Mathf.Abs(y_input) > threshold)
+                anim.SetBool("Moving", true);
+            else
+                anim.SetBool("Moving", false);
+
+            FollowTarget();
+            AttackTarget();
+            SetSword();
+
+            if (facing_right)
+            {
+                sprite.flipX = false;
+            }
+            else if (!facing_right)
+            {
+                sprite.flipX = true;
+            }
         }
     }
 

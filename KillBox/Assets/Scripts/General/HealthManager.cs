@@ -8,11 +8,13 @@ public class HealthManager : MonoBehaviour {
 
     public float invincibiltyFrames = .1f;
     public GameObject hurtEffect;
+    public GameObject deathEffect;
     float invinceTimer;
 
     bool hasDied;
 
     Animator anim;
+    
     Rigidbody2D rb;
 
     bool hurting;
@@ -54,8 +56,11 @@ public class HealthManager : MonoBehaviour {
         if (invinceTimer <= 0)
         {
             currentHealth -= damage;
+            if (currentHealth > 0)
             GameObject.FindGameObjectWithTag("Camera").GetComponent<Animator>().SetTrigger("Shake");
-           
+            else
+                GameObject.FindGameObjectWithTag("Camera").GetComponent<Animator>().SetTrigger("Hard_Shake");
+
             anim.SetTrigger("Hurt");
             invinceTimer = invincibiltyFrames;
             Instantiate(hurtEffect, transform.position, Quaternion.identity);
@@ -87,6 +92,9 @@ public class HealthManager : MonoBehaviour {
 
     public void Death()
     {
+        Debug.Log("Dead");
+        GameObject.FindGameObjectWithTag("Camera").GetComponent<Animator>().SetTrigger("Hard_Shake");
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
