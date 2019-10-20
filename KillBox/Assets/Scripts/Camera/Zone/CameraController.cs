@@ -6,35 +6,42 @@ public class CameraController : MonoBehaviour
 {
 
 
-    public float targetFOV = 60f;
-    float sizeDecrement = 0.001f;
+     float targetFOV;
+    public float sizeDecrement = .5f;
     public float initialFOV = 60f;
-    public float shrinkChange = 15f; //Shrink Zone Decreemnt
-    public float smoothRate = 5f; // Value for smoother transition
+    public float smoothRate = 1f; // Value for smoother transition
     public Camera cam; //set main camera to this variable
 
     private float cameraTimer;
     private float currentFOV;
-
+    public float maxTime = 20.0f;
+    float zoomTimer;
     bool didZoneShrink = false;
     // Use this for initialization
     void Start()
     {
         cam.orthographicSize = initialFOV;
+        zoomTimer = maxTime;
+        targetFOV = initialFOV;
     }
     // Update is called once per frame
     void Update()
     {
         currentFOV = cam.orthographicSize; //keep track of Current FOV
 
-        if (Input.GetKey("a")) //Use this code to test shrink
-        {
-            ShrinkFOV(shrinkChange);
-            Debug.Log("Pressed A");
-        }
+        
         if (didZoneShrink) //Zone is shrinking
         {
             ChangeFOV();
+        }
+        else
+        {
+            zoomTimer -= Time.deltaTime;
+            if (zoomTimer <= 0)
+            {
+                ShrinkFOV(sizeDecrement);
+                zoomTimer = maxTime; 
+            }
         }
 
     }
@@ -65,6 +72,11 @@ public class CameraController : MonoBehaviour
         }
     }
 
-
+    public void ResetFOV()
+    {
+        cam.orthographicSize = initialFOV;
+        targetFOV = initialFOV;
+        didZoneShrink = false;
+    }
 
 }
