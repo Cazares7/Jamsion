@@ -15,6 +15,7 @@ public class PlayerControllerTemplate : MonoBehaviour
     Animator anim;
     HealthManager health;
 
+    public DeathMenu dm;
     int x_input;
     int y_input;
     // Use this for initialization
@@ -23,7 +24,7 @@ public class PlayerControllerTemplate : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        health = GetComponent<HealthManager>();
+        health = GetComponent<HealthManager>();    
     }
 
     private void FixedUpdate()
@@ -32,7 +33,7 @@ public class PlayerControllerTemplate : MonoBehaviour
     private void OnBecameInvisible() //Player moves off screen
     {
         health.Death();
-
+        LoadDeathScreen();
     }
     // Update is called once per frame
     void Update()
@@ -95,6 +96,10 @@ public class PlayerControllerTemplate : MonoBehaviour
         {
             sprite.flipX = true;
         }
+        if (health.IsDead())
+        {
+            LoadDeathScreen();
+        }
     }
 
     void Flip()
@@ -107,4 +112,10 @@ public class PlayerControllerTemplate : MonoBehaviour
         Vector2 vector = new Vector2(x_input, y_input);
         return vector;
     }
+    public void LoadDeathScreen()
+    {
+        dm.ToggleDeathMenu();
+
+    }
+    
 }

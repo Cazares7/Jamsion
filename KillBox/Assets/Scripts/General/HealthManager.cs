@@ -127,4 +127,9 @@ public class HealthManager : MonoBehaviour {
     {
         return hurting;
     }
+
+    public bool IsDead()
+    {
+        return hasDied;
+    }
 }

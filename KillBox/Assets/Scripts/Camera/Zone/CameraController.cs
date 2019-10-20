@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     public float maxTime = 20.0f;
     float zoomTimer;
     bool didZoneShrink = false;
+    public DeathMenu dm;
     // Use this for initialization
     void Start()
     {
@@ -27,20 +28,23 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentFOV = cam.orthographicSize; //keep track of Current FOV
+        if (!dm.IsDeathMenuActive())
+        {
+            currentFOV = cam.orthographicSize; //keep track of Current FOV
 
-        
-        if (didZoneShrink) //Zone is shrinking
-        {
-            ChangeFOV();
-        }
-        else
-        {
-            zoomTimer -= Time.deltaTime;
-            if (zoomTimer <= 0)
+
+            if (didZoneShrink) //Zone is shrinking
             {
-                ShrinkFOV(sizeDecrement);
-                zoomTimer = maxTime; 
+                ChangeFOV();
+            }
+            else
+            {
+                zoomTimer -= Time.deltaTime;
+                if (zoomTimer <= 0)
+                {
+                    ShrinkFOV(sizeDecrement);
+                    zoomTimer = maxTime;
+                }
             }
         }
 

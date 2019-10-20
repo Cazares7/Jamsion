@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour {
 
     public GameObject [] enemies;
     GameObject spawnee;
+    
 
 	// Use this for initialization
     
@@ -20,8 +21,11 @@ public class Spawner : MonoBehaviour {
 	}
     public void Spawn()
     {
+       
+        
         int chosenSpawnee = Random.Range(0, enemies.Length);
         spawnee = enemies[chosenSpawnee];
         Instantiate(spawnee, transform.position, transform.rotation);
+        
     }
 }

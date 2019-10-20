@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
     public GameObject[] spawners;
+    public DeathMenu dm;
     int totalSpawnedEnemies;
     int enemyIncrement = 3;
     int totalEnemiesKilled = 3;
@@ -31,6 +32,7 @@ public class LevelManager : MonoBehaviour {
         totalSpawnedEnemies += enemyIncrement;
         totalEnemiesKilled += 1;
         currentEnemiesKilled = 0;
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().ResetFOV();
     }
     void IncreaseEnemyKillCount()
     {
@@ -43,10 +45,13 @@ public class LevelManager : MonoBehaviour {
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < totalSpawnedEnemies; i++)
+        if (!dm.IsDeathMenuActive())
         {
-            int chosenSpawner = Random.Range(0, spawners.Length);
-            spawners[chosenSpawner].GetComponent<Spawner>().Spawn();
+            for (int i = 0; i < totalSpawnedEnemies; i++)
+            {
+                int chosenSpawner = Random.Range(0, spawners.Length);
+                spawners[chosenSpawner].GetComponent<Spawner>().Spawn();
+            }
         }
     }
 }
