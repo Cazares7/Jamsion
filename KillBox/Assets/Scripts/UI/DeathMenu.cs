@@ -17,8 +17,7 @@ public class DeathMenu : MonoBehaviour
     {
         
         gameObject.SetActive(true);
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().ResetFOV();
-        Debug.Log("Toggled Death menu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         deathScreenActive = true;
 
     }
