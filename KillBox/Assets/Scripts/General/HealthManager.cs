@@ -94,6 +94,7 @@ public class HealthManager : MonoBehaviour {
     {
         Debug.Log("Dead");
         GameObject.FindGameObjectWithTag("Camera").GetComponent<Animator>().SetTrigger("Hard_Shake");
+        GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().IncreaseEnemyKillCount();
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

@@ -34,9 +34,10 @@ public class LevelManager : MonoBehaviour {
         currentEnemiesKilled = 0;
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>().ResetFOV();
     }
-    void IncreaseEnemyKillCount()
+    public void IncreaseEnemyKillCount()
     {
         currentEnemiesKilled++;
+        Debug.Log("Killed Enemy");
         if(currentEnemiesKilled >= totalEnemiesKilled)
         {
             GameObject.FindGameObjectWithTag("Stairway").GetComponent<Stairway>().ShowStairCase();
