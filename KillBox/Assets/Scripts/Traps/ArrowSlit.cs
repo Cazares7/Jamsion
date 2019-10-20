@@ -7,6 +7,7 @@ public class ArrowSlit : MonoBehaviour {
     public BoxCollider2D hitCollider;
     public GameObject arrow;
     public bool playerHit;
+    public float reloadTime;
 
 
 	// Use this for initialization
@@ -25,15 +26,21 @@ public class ArrowSlit : MonoBehaviour {
 
     public IEnumerator Shoot()
     {
-        anim.SetBool("IsActive", true);
-        yield return new WaitForSeconds(0.1f);
-        hitCollider.enabled = true;
-        yield return new WaitForSeconds(0.2f);
-        hitCollider.enabled = false;
-        if (!playerHit) {
-            Instantiate(arrow, this.gameObject.GetComponent<Transform>().position + new Vector3(0f, -0.15f, 0f), Quaternion.identity);
+        bool activated = true;
+        while (activated)
+        {
+            playerHit = false;
+            yield return new WaitForSeconds(reloadTime);
+            anim.SetBool("IsActive", true);
+            yield return new WaitForSeconds(0.1f);
+            hitCollider.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            hitCollider.enabled = false;
+            if (!playerHit) {
+                Instantiate(arrow, this.gameObject.GetComponent<Transform>().position + new Vector3(0f, -0.15f, 0f), Quaternion.identity);
+            }
+            anim.SetBool("IsActive", false);
         }
-        anim.SetBool("IsActive", false);
     }
 
     public void OnCollisionEnter2D(UnityEngine.Collision2D collision)
