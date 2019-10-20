@@ -112,10 +112,5 @@ public class PlayerControllerTemplate : MonoBehaviour
         Vector2 vector = new Vector2(x_input, y_input);
         return vector;
     }
-    public void LoadDeathScreen()
-    {
-        dm.ToggleDeathMenu();
-
-    }
     
 }
