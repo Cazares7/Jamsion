@@ -44,7 +44,7 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    void SpawnEnemies()
+    public void SpawnEnemies()
     {
         if (!dm.IsDeathMenuActive())
         {

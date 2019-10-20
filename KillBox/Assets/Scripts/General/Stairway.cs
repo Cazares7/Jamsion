@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Stairway : MonoBehaviour {
 
@@ -21,6 +22,10 @@ public class Stairway : MonoBehaviour {
         {
             StartNextLevel();
         }
+        if (!isShown)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
 	}
     public void ShowStairCase()
     {
@@ -32,14 +37,16 @@ public class Stairway : MonoBehaviour {
     {
         if (isShown)
         {
-            GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().ImproveStats();
-            Debug.Log("New Level");
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            for (int i =0; i < enemies.Length; i++)
-            {
-
-            }
-            isShown = false;
+            //GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().ImproveStats();
+            //GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().SpawnEnemies();
+            //Debug.Log("New Level");
+            //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            //for (int i =0; i < enemies.Length; i++)
+            //{
+            //    Destroy(enemies[i]);
+            //}
+            //isShown = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
     

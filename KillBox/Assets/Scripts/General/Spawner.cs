@@ -11,7 +11,7 @@ public class Spawner : MonoBehaviour {
 	// Use this for initialization
     
 	void Start () {
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        
         
 	}
 	
@@ -21,8 +21,8 @@ public class Spawner : MonoBehaviour {
 	}
     public void Spawn()
     {
-       
-        
+
+        Debug.Log("SpawnEnemy");
         int chosenSpawnee = Random.Range(0, enemies.Length);
         spawnee = enemies[chosenSpawnee];
         Instantiate(spawnee, transform.position, transform.rotation);
